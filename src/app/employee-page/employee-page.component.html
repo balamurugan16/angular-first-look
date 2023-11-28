@@ -1,0 +1,64 @@
+<div class="search-container">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title> Employee Search </mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<form
+				#employeeForm="ngForm"
+				class="employee-form"
+				(ngSubmit)="searchEmployees()"
+			>
+				<section>
+					<mat-form-field appearance="fill">
+						<mat-label>Employee Name</mat-label>
+						<input
+							matInput
+							id="employeeName"
+							name="employeeName"
+							[(ngModel)]="employeeName"
+							required
+						/>
+					</mat-form-field>
+					<mat-form-field appearance="fill">
+						<mat-label>Department</mat-label>
+						<input
+							matInput
+							id="department"
+							name="department"
+							[(ngModel)]="department"
+							required
+						/>
+					</mat-form-field>
+				</section>
+				<button mat-raised-button color="primary" type="submit">Search</button>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
+<div class="table-container">
+	<table mat-table [dataSource]="employees" class="mat-elevation-z8">
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef> Id </th>
+			<td mat-cell *matCellDef="let employee"> {{ employee.id }} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef> Name </th>
+			<td mat-cell *matCellDef="let employee"> {{ employee.name }} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="department">
+			<th mat-header-cell *matHeaderCellDef> Department </th>
+			<td mat-cell *matCellDef="let employee"> {{ employee.department }} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="designation">
+			<th mat-header-cell *matHeaderCellDef> Designation </th>
+			<td mat-cell *matCellDef="let employee"> {{ employee.designation }} </td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+</div>
